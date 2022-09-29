@@ -4,16 +4,6 @@ const Gameboard = (() => {
     '', '', '', 
     '', '', ''
   ];
-  let Player1 = {};
-  let Player2 = {};
-  let currentPlayer = {};
-  const toggleCurrentPlayer = () => {
-    if (currentPlayer === Player1) {
-      currentPlayer === Player2;
-    } else {
-      currentPlayer === Player1;
-    }
-  };
   const checkWinner = () => {
     // finish
   }
@@ -21,50 +11,21 @@ const Gameboard = (() => {
   const reset = () => {
     gameboardArray = ['', '', '', '', '', '', '', '', ''];
   }
-  const setPlayer1 = (Player1Reference) => {
-    Player1 = Player1Reference;
-  }
-  const getPlayer1 = () => {
-    return Player1;
-  }
-  const setPlayer2 = (Player2Reference) => {
-    Player2 = Player2Reference;
-  }
-  const getPlayer2 = () => {
-    return Player2;
-  }
   const getGameboardArray = () => {
     return gameboardArray;
   }
   const placeMarker = (locationIndex) => {
     // finish
   }
-  const startGame = (Player1Reference, Player2Reference) => {
-    Player1 = Player1Reference;
-    Player2 = Player2Reference;
-    currentPlayer = Player1;
-    //DisplayController.drawGameBoard
-  }
-  const endGame = (PlayerWinner) => {
-    // DisplayController.showWinner(PlayerWinner)
-  }
 
   return {
     reset,
-    setPlayer1,
-    getPlayer1,
-    setPlayer2,
-    getPlayer2,
     getGameboardArray,
     placeMarker,
-    startGame,
-    endGame,
   };
 })();
 
 const Player = (name, marker) => {
-  // let name = name;
-  // let marker = marker;
 
   const setName = (nameStr) => {
     name = nameStr;
@@ -78,6 +39,7 @@ const Player = (name, marker) => {
   const getMarker = () => {
     return marker;
   };
+
   return {
     setName,
     getName,
@@ -85,11 +47,6 @@ const Player = (name, marker) => {
     getMarker,
   };
 };
-
-//TEMP
-const p1 = Player('me', 'X');
-const p2 = Player('you', 'O');
-Gameboard.startGame(p1, p2);
 
 // console.log(Gameboard.getPlayer1().getName());
 // Gameboard.getPlayer1().setName('ben');
@@ -123,13 +80,51 @@ const DisplayController = (() => {
 console.log(DisplayController.player2NameDisplay.textContent);
 
 const Game = (() => {
-  const startGame = () => {
-    const Player1 = Player(DisplayController.getPlayer1Name(), 'X');
-    const Player2 = Player(DisplayController.getPlayer2Name(), 'O');
-    Gameboard.startGame(Player1, Player2);
+  let Player1 = {};
+  let Player2 = {};
+  let currentPlayer = {};
+  const toggleCurrentPlayer = () => {
+    if (currentPlayer === Player1) {
+      currentPlayer === Player2;
+    } else {
+      currentPlayer === Player1;
+    }
   };
 
+  const setPlayer1 = (Player1Reference) => {
+    Player1 = Player1Reference;
+  }
+  const getPlayer1 = () => {
+    return Player1;
+  }
+  const setPlayer2 = (Player2Reference) => {
+    Player2 = Player2Reference;
+  }
+  const getPlayer2 = () => {
+    return Player2;
+  }
+  const startGame = () => {
+    //NOT YET FUNCTIONING
+    const Player1 = Player(DisplayController.getPlayer1Name(), 'X');
+    const Player2 = Player(DisplayController.getPlayer2Name(), 'O');
+    
+    currentPlayer = Player1;
+    console.log(Player1.getName());
+    //DisplayController.drawGameBoard
+  };
+  const endGame = (PlayerWinner) => {
+    // DisplayController.showWinner(PlayerWinner)
+  }
+
   return {
+    setPlayer1,
+    getPlayer1,
+    setPlayer2,
+    getPlayer2,
     startGame,
+    endGame,
   }
 })();
+
+//TEMP
+Game.startGame();
