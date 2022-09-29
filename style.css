@@ -1,0 +1,5 @@
+.gameboard {
+  display: grid;
+  grid-template: repeat(3, 100px) / repeat(3, 100px);
+  border: 2px solid black;
+}
