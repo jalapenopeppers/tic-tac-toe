@@ -3,3 +3,7 @@
   grid-template: repeat(3, 100px) / repeat(3, 100px);
   border: 2px solid black;
 }
+
+.cell {
+  border: 1px solid black;
+}

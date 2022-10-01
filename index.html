@@ -11,7 +11,7 @@
 <body>
   <div class="layout-container">
     <div class="header">
-
+      <div class="header-text">TIC-TAC-TOE</div>
     </div>
     <div class="main-content">
       <div class="player-info">
@@ -23,23 +23,26 @@
         <div class="player2-info">
           <div class="player2-name-display">Mama</div>
           <input type="text" class="player2-name-input" name="player2-name" value="Mama">
-          <button>Change Name</button>
+          <button class="change-p2-name-button" onclick="DisplayController.updatePlayer2Name()">Change Name</button>
         </div>
       </div>
       <div class="gameboard">
-        <div class="cell1"></div>
-        <div class="cell2"></div>
-        <div class="cell3"></div>
-        <div class="cell4"></div>
-        <div class="cell5"></div>
-        <div class="cell6"></div>
-        <div class="cell7"></div>
-        <div class="cell8"></div>
-        <div class="cell9"></div>
+        <div class="cell cell1" location-index="0"></div>
+        <div class="cell cell2" location-index="1"></div>
+        <div class="cell cell3" location-index="2"></div>
+        <div class="cell cell4" location-index="3"></div>
+        <div class="cell cell5" location-index="4"></div>
+        <div class="cell cell6" location-index="5"></div>
+        <div class="cell cell7" location-index="6"></div>
+        <div class="cell cell8" location-index="7"></div>
+        <div class="cell cell9" location-index="8"></div>
       </div>
     </div>
     <div class="footer">
-
+      <div class="footer-text">Made By: Jalapenopeppers</div>
+      <a class="github-link" href="https://github.com/jalapenopeppers/mini-song-library">
+        <img class="github-logo" src="./images/GitHub-Mark-32px.png" alt="Github Logo">
+      </a>
     </div>
   </div>
 </body>
