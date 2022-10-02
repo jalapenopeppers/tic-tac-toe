@@ -1,9 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --header-color: #4281A4;
+  --main-background-color: #D4B483;
+  --footer-color: #C1666B;
+  --light-color: #E4DFDA;
+}
+
+.layout-container {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Special Elite', cursive;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.header {
+  height: 100px;
+  font-size: 60px;
+  color: var(--light-color);
+  background-color: var(--header-color);
+  display: grid;
+  align-items: center;
+}
+
+.winner-display-container {
+  visibility: hidden;
+  position: relative;
+  width: 100vw;
+  background-color: #D4B483;
+}
+
+.winner-display {
+  top: 20px;
+  right: 50%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: max-content min-content;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.main-content {
+  font-size: 30px;
+  flex: 1;
+  background-color: var(--main-background-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* place-content: center; */
+  justify-items: end;
+  align-content: center;
+  gap: 50px;
+}
+
+/* .player-info {
+  align-items: end;
+} */
+
+.player1-info {
+  padding-bottom: 40px;
+}
+
+.player1-info,
+.player2-info {
+  display: grid;
+  gap: 5px;
+}
+
+.player1-name-display-elements,
+.player1-score-display-elements,
+.player2-name-display-elements,
+.player2-score-display-elements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 .gameboard {
+  height: min-content;
+  justify-self: start;
   display: grid;
   grid-template: repeat(3, 100px) / repeat(3, 100px);
   border: 2px solid black;
 }
 
 .cell {
+  padding-top: 20px;
+  font-size: 80px;
   border: 1px solid black;
+  cursor: pointer;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: var(--light-color);
+}
+
+button {
+  padding: 2px;
+  padding-top: 6px;
+  width: 100px;
+  font-family: 'Special Elite', cursive;
+  border-radius: 5px;
+  justify-self: center;
+}
+
+.footer {
+  height: 50px;
+  padding: 10px;
+  font-size: 14px;
+  color: black;
+  background-color: var(--footer-color);
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  place-content: center;
+  align-items: center;
+  gap: 20px;
 }

@@ -45,9 +45,11 @@ const Gameboard = (() => {
       gameboardArray[locationIndex] = Game.getCurrentPlayer().getMarker();
       DisplayController.drawGameBoard();
       let possibleWinner = checkWinner();
+      console.log(possibleWinner);
       if (possibleWinner !== '') {
         Game.endGame(possibleWinner);
       } else {
+        console.log('toggle player');
         Game.toggleCurrentPlayer();
       }
     }
@@ -62,6 +64,7 @@ const Gameboard = (() => {
 })();
 
 const Player = (name, marker) => {
+  let score = 0;
 
   const setName = (nameStr) => {
     name = nameStr;
@@ -75,12 +78,20 @@ const Player = (name, marker) => {
   const getMarker = () => {
     return marker;
   };
+  const setScore = (newScore) => {
+    score = newScore;
+  };
+  const getScore = () => {
+    return score;
+  };
 
   return {
     setName,
     getName,
     setMarker,
     getMarker,
+    setScore,
+    getScore,
   };
 };
 
@@ -129,7 +140,24 @@ const DisplayController = (() => {
     }
   }
   const showWinner = (possibleWinner) => {
-    // CONTINUE
+    //Update scores:
+    let p1Score = document.querySelector('.player1-score');
+    p1Score.textContent = Game.getPlayer1().getScore();
+    let p2Score = document.querySelector('.player2-score');
+    p2Score.textContent = Game.getPlayer2().getScore();
+
+    let winnerDisplayText = document.querySelector('.winner-display-text');
+    let winnerDisplay = document.querySelector('.winner-display-container');
+    winnerDisplay.style.visibility = 'visible';
+    if (possibleWinner === 'winner') {
+      if (Game.getLastWinner().getName() === '') {
+        winnerDisplayText.textContent = Game.getLastWinner().getMarker() + ' has won!';
+      } else {
+        winnerDisplayText.textContent = Game.getLastWinner().getName() + ' has won!';
+      }
+    } else {
+      winnerDisplayText.textContent = `It's a tie!`;
+    }
   }
 
   return {
@@ -150,6 +178,7 @@ const Game = (() => {
   let Player2 = {};
   let currentPlayer = {};
   let lastWinner = {};
+  let gameOver = false; // Used to add to score only once
 
   const toggleCurrentPlayer = () => {
     if (currentPlayer === Player1) {
@@ -157,6 +186,7 @@ const Game = (() => {
     } else {
       currentPlayer = Player1;
     }
+    console.log('Current Player: ' + currentPlayer.getName());
   };
   const setPlayer1 = (Player1Reference) => {
     Player1 = Player1Reference;
@@ -182,15 +212,25 @@ const Game = (() => {
     Player2 = Player(DisplayController.getPlayer2Name(), 'O');
     currentPlayer = Player1;
     lastWinner = {};
+    gameOver = true;
     Gameboard.reset();
   };
   const restartGame = () => {
-    Player1 = Player(DisplayController.getPlayer1Name(), 'X');
-    Player2 = Player(DisplayController.getPlayer2Name(), 'O');
+    // Player1 = Player(DisplayController.getPlayer1Name(), 'X');
+    // Player2 = Player(DisplayController.getPlayer2Name(), 'O');
+    // currentPlayer = lastWinner;
+    console.log(`Current player after restart: ${currentPlayer.getName()}`);
     Gameboard.reset();
-    currentPlayer = lastWinner;
+
+    let winnerDisplay = document.querySelector('.winner-display-container');
+    winnerDisplay.style.visibility = 'hidden';
+    gameOver = true;
   }
   const endGame = (possibleWinner) => {
+    if (gameOver === true) {
+      currentPlayer.setScore(currentPlayer.getScore() + 1);
+      gameOver = false;
+    }
     lastWinner = currentPlayer;
     DisplayController.showWinner(possibleWinner)
   }
